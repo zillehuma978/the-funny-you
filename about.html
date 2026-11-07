@@ -2,48 +2,468 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | THE FUNNY YOU</title>
-    <meta name="description" content="Learn about THE FUNNY YOU, a fun personality quiz game.">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #fff0f6;
-            color: #333;
-            text-align: center;
-            padding: 40px 20px;
-        }
-        .container {
-            max-width: 650px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 18px;
-        }
-        h1 { color: #e84393; }
-        p { line-height: 1.7; }
-        a { color: #e84393; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About & How to Play | THE FUNNY YOU</title>
+<meta name="description" content="Discover THE FUNNY YOU, a fun personality quiz game. Learn how to play, answer funny questions and discover your personality!">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff8fc;
+    color: #45364f;
+    line-height: 1.7;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 7%;
+    background: rgba(255,255,255,.85);
+    border-bottom: 1px solid #f5e5f2;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #b15ca6;
+    font-size: 17px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #a34f9d;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 20px 90px;
+    background:
+      radial-gradient(circle at 15% 20%, #fce4f2, transparent 35%),
+      radial-gradient(circle at 85% 70%, #e9e1ff, transparent 35%),
+      linear-gradient(135deg,#fff5fa,#f7f1ff);
+}
+
+.eyebrow {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 30px;
+    background: white;
+    color: #b45ca7;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(43px,8vw,76px);
+    line-height: 1.12;
+    color: #8752a5;
+    margin-bottom: 22px;
+}
+
+.hero h1 span {
+    color: #d66da9;
+}
+
+.hero p {
+    max-width: 620px;
+    margin: auto;
+    color: #76657e;
+    font-size: 17px;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 40px;
+    background: linear-gradient(135deg,#dc79b4,#9b75d7);
+    color: white;
+    font-weight: 800;
+    margin-top: 30px;
+    box-shadow: 0 9px 24px #d9b4df;
+    transition: .25s;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 13px 28px #cba4db;
+}
+
+.container {
+    max-width: 1050px;
+    padding: 0 22px;
+    margin: auto;
+}
+
+.section {
+    padding: 75px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+.section-title small {
+    color: #c06da9;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px,5vw,43px);
+    color: #89549f;
+    margin-top: 10px;
+}
+
+.section-title p {
+    color: #87778d;
+    margin-top: 10px;
+}
+
+.about-card {
+    background: white;
+    padding: 40px;
+    border-radius: 28px;
+    box-shadow: 0 12px 40px rgba(151,100,160,.09);
+    text-align: center;
+    border: 1px solid #f6e7f4;
+}
+
+.about-card p {
+    color: #786a80;
+    max-width: 750px;
+    margin: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 28px 23px;
+    border-radius: 24px;
+    border: 1px solid #f5e5f2;
+    box-shadow: 0 10px 30px rgba(151,100,160,.07);
+    transition: .25s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+.icon {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 19px;
+    background: #fceaf5;
+    font-size: 27px;
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    color: #a35eaa;
+    margin-bottom: 9px;
+    font-size: 18px;
+}
+
+.card p {
+    color: #82738a;
+    font-size: 14px;
+}
+
+.steps {
+    display: grid;
+    gap: 17px;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: white;
+    padding: 24px;
+    border-radius: 22px;
+    border: 1px solid #f3e5f2;
+    box-shadow: 0 7px 25px rgba(151,100,160,.06);
+}
+
+.number {
+    min-width: 43px;
+    height: 43px;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    background: #f8e4f4;
+    color: #a44d9d;
+    font-weight: 800;
+}
+
+.step h3 {
+    color: #92549e;
+    margin-bottom: 5px;
+}
+
+.step p {
+    color: #81738a;
+    font-size: 14px;
+}
+
+.note {
+    background: linear-gradient(120deg,#fff0f7,#f1eaff);
+    border-radius: 26px;
+    padding: 38px 25px;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.note h2 {
+    color: #9657a4;
+    font-family: 'Playfair Display',serif;
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.note p {
+    color: #796987;
+}
+
+footer {
+    background: #f8edf7;
+    padding: 38px 20px;
+    text-align: center;
+    color: #927b9a;
+    font-size: 13px;
+}
+
+footer a {
+    color: #a45caa;
+    text-decoration: none;
+    margin: 0 8px;
+}
+
+@media(max-width:600px) {
+    nav { padding: 17px 5%; }
+    .logo { font-size: 14px; }
+    .hero { padding: 75px 20px; }
+    .about-card { padding: 28px 20px; }
+    .step { padding: 19px; }
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>About THE FUNNY YOU</h1>
 
-        <p>Welcome to THE FUNNY YOU!</p>
+<nav>
+    <div class="logo">✦ THE FUNNY YOU</div>
+    <a class="nav-link" href="index.html">← BACK TO GAME</a>
+</nav>
 
-        <p>THE FUNNY YOU is a fun and entertaining
-        personality quiz game where players answer
-        funny questions and discover their unique
-        funny personalities.</p>
+<header class="hero">
+    <div class="eyebrow">♡ WELCOME TO OUR LITTLE WORLD ♡</div>
 
-        <p>Our goal is to make people smile, enjoy
-        fun quizzes, and share entertaining results
-        with friends.</p>
+    <h1>Meet Your <span>Funny Side!</span></h1>
 
-        <p>Thank you for visiting THE FUNNY YOU!</p>
+    <p>
+        New here? Don't worry! You're in the right place.
+        THE FUNNY YOU is a playful personality quiz where
+        every answer takes you closer to discovering your
+        unique and hilarious personality.
+    </p>
 
-        <a href="index.html">Back to Home</a>
+    <a href="index.html" class="btn">LET'S PLAY ✨</a>
+</header>
+
+<main class="container">
+
+<section class="section">
+    <div class="section-title">
+        <small>GET TO KNOW US</small>
+        <h2>What Is THE FUNNY YOU?</h2>
+        <p>A little fun, a little personality, and lots of smiles!</p>
     </div>
+
+    <div class="about-card">
+        <p>
+            THE FUNNY YOU is an entertaining personality
+            quiz game made for people who love fun questions
+            and unexpected results. Answer the questions,
+            discover your personality result, and enjoy
+            sharing your experience with friends.
+            There are no right or wrong answers.
+            Just be yourself and have fun!
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-title">
+        <small>YOUR GAME GUIDE</small>
+        <h2>How Does It Work?</h2>
+        <p>Everything is simple. Just follow these steps!</p>
+    </div>
+
+    <div class="steps">
+
+        <div class="step">
+            <div class="number">01</div>
+            <div>
+                <h3>🎀 Open the Game</h3>
+                <p>
+                    Click the Let's Play button or Back to Game
+                    link. You'll enter the THE FUNNY YOU game.
+                </p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="number">02</div>
+            <div>
+                <h3>💭 Answer the Questions</h3>
+                <p>
+                    Read each funny question carefully and
+                    choose the answer that feels most like you.
+                    There is no need to overthink!
+                </p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="number">03</div>
+            <div>
+                <h3>✨ Discover Your Personality</h3>
+                <p>
+                    Complete the quiz to reveal your funny
+                    personality result. See which personality
+                    matches your answers!
+                </p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="number">04</div>
+            <div>
+                <h3>🎉 Enjoy Your Result</h3>
+                <p>
+                    Explore your personality description and
+                    enjoy your result. Share it with friends
+                    if you like!
+                </p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="number">05</div>
+            <div>
+                <h3>🏆 Explore More Features</h3>
+                <p>
+                    Visit the leaderboard and player history
+                    to explore more of the game's features.
+                    You can also use the sound controls.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-title">
+        <small>THE LITTLE DETAILS</small>
+        <h2>What's Inside?</h2>
+        <p>Explore the fun features of our game.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="icon">🎭</div>
+            <h3>Funny Personalities</h3>
+            <p>Discover entertaining personality results based on your quiz answers.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎊</div>
+            <h3>Fun Animations</h3>
+            <p>Enjoy playful visual effects and a fun quiz experience.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏆</div>
+            <h3>Leaderboard</h3>
+            <p>Explore the leaderboard feature and see the players displayed there.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📜</div>
+            <h3>Player History</h3>
+            <p>Explore the player history feature to revisit available game results.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🔊</div>
+            <h3>Sound Controls</h3>
+            <p>Enjoy game sounds and use the mute control when you prefer silence.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">💌</div>
+            <h3>Share Your Result</h3>
+            <p>Share your personality result and let your friends join the fun.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="note">
+    <h2>Ready to Discover Yourself? ♡</h2>
+    <p>
+        No pressure. No complicated rules.
+        Just answer, enjoy, and discover your funny side!
+    </p>
+    <a href="index.html" class="btn">START PLAYING NOW ✨</a>
+</section>
+
+</main>
+
+<footer>
+    <p>Made with ♡ by THE FUNNY YOU</p>
+    <p style="margin-top:10px;">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+    </p>
+    <p style="margin-top:14px;">© 2026 THE FUNNY YOU</p>
+</footer>
+
 </body>
 </html>

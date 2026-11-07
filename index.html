@@ -59,6 +59,41 @@ td{font-size:14px}
 .pop{animation:pop .55s ease both}
 @keyframes pop{0%{transform:scale(.75);opacity:0}70%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
 @media(max-width:520px){.result-grid{grid-template-columns:1fr}.app{padding:20px}.topline{align-items:flex-start}}
+ /* Mobile Responsive Fix */
+@media screen and (max-width: 768px) {
+
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .container,
+  .game-container,
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  nav a {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
 </style>
 </head>
 <body>

@@ -1,239 +1,777 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <link rel="icon" type="image/png" href="favicon.png"> 
 <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+
 <title>Funny Personality Quiz Game | THE FUNNY YOU</title>
-  <meta name="description" content="Play fun personality quiz games, answer hilarious questions and discover your unique funny personality with THE FUNNY YOU!">
+<meta name="description" content="Play fun personality quiz games, answer hilarious questions and discover your unique funny personality with THE FUNNY YOU!">
+
 <style>
-:root{--pink:#ff5fa2;--deep:#d93682;--pale:#fff0f7;--ink:#43283a;--purple:#8b65c9}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top left,#ffe0ef,transparent 38%),linear-gradient(135deg,#fff7fb,#f8efff);display:flex;justify-content:center;align-items:center;padding:22px}
-button,input{font:inherit}
-button{border:0;border-radius:15px;padding:13px 20px;background:linear-gradient(135deg,var(--pink),var(--deep));color:white;font-weight:800;cursor:pointer;box-shadow:0 7px 18px #e94b9630;transition:.2s}
-button:hover{transform:translateY(-2px);filter:saturate(1.1)}
-button:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.secondary{background:#fff;color:var(--deep);border:2px solid #ffd0e4;box-shadow:none}
-.app{width:min(760px,100%);background:#ffffffeb;border:1px solid #fff;border-radius:28px;padding:clamp(20px,5vw,42px);box-shadow:0 22px 70px #9d5b8024;position:relative;overflow:hidden}
-.app:before{content:"";position:absolute;width:210px;height:210px;border-radius:50%;background:#ffe5f1;right:-105px;top:-110px;z-index:0}
-.content{position:relative;z-index:1}
-.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-.logo{font-size:13px;letter-spacing:2px;font-weight:900;color:var(--deep)}
-.sound{padding:9px 13px;font-size:13px}
-h1{font-size:clamp(32px,7vw,54px);line-height:1.02;margin:12px 0;color:#d93682}
-h2{font-size:clamp(24px,5vw,34px);margin:8px 0 12px}
-p{line-height:1.6}
-.muted{color:#8c7182}
-.center{text-align:center}
-.emoji{font-size:54px;margin:8px}
-input{width:100%;padding:15px 16px;border:2px solid #f5c7dc;border-radius:14px;outline:none;margin:10px 0 16px;background:#fffafd}
-input:focus{border-color:var(--pink);box-shadow:0 0 0 4px #ff5fa21c}
-.progress-wrap{height:11px;background:#f8dce9;border-radius:99px;overflow:hidden;margin:18px 0 8px}
-.progress{height:100%;width:0;background:linear-gradient(90deg,#ff9bc6,#d93682);border-radius:99px;transition:width .45s ease}
-.progress-label{display:flex;justify-content:space-between;font-size:13px;color:#98788b}
-.question{font-size:clamp(22px,4.5vw,30px);font-weight:900;margin:24px 0}
-.answers{display:grid;gap:12px}
-.answer{width:100%;text-align:left;background:#fff5fa;color:#5a344b;border:2px solid #f7d5e5;box-shadow:none;padding:16px;border-radius:16px;font-weight:700}
-.answer:hover{background:#ffe8f3;border-color:#ff8fbd}
-.answer.selected{background:#ffe0ef;border-color:var(--pink)}
-.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:22px}
-.hidden{display:none!important}
-.result-card{background:linear-gradient(145deg,#fff1f8,#f5edff);border:2px solid #ffd2e6;border-radius:24px;padding:25px;margin:20px 0}
-.personality-emoji{font-size:64px}
-.personality-name{font-size:clamp(27px,6vw,40px);font-weight:1000;color:#d93682;margin:8px 0}
-.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;text-align:left;margin-top:18px}
-.info{background:#ffffffc9;padding:14px;border-radius:15px}
-.info b{display:block;color:#bd3979;margin-bottom:5px}
-.small{font-size:13px}
-.panel{background:#fff6fa;border:1px solid #f6d5e5;padding:16px;border-radius:17px;margin:12px 0}
-table{width:100%;border-collapse:collapse;text-align:left}
-th,td{padding:11px 8px;border-bottom:1px solid #f2d8e5}
-th{color:#bd3979;font-size:13px}
-td{font-size:14px}
-.rank{font-weight:900;color:#d93682}
-.footer{margin-top:22px;text-align:center;color:#a78b9b;font-size:12px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#43283a;color:white;padding:12px 18px;border-radius:30px;z-index:10;box-shadow:0 8px 30px #0002}
-.confetti{position:fixed;top:-15px;width:9px;height:14px;z-index:20;pointer-events:none;animation:fall 2.8s linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(760deg);opacity:.2}}
-.pop{animation:pop .55s ease both}
-@keyframes pop{0%{transform:scale(.75);opacity:0}70%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
-@media(max-width:520px){.result-grid{grid-template-columns:1fr}.app{padding:20px}.topline{align-items:flex-start}}
- /* Mobile Responsive Fix */
-@media screen and (max-width: 768px) {
+:root {
+  --pink:#ff5fa2;
+  --deep:#d93682;
+  --pale:#fff0f7;
+  --ink:#43283a;
+  --purple:#8b65c9;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  min-height:100vh;
+  font-family:"Trebuchet MS",Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at top left,#ffe0ef,transparent 38%),
+    linear-gradient(135deg,#fff7fb,#f8efff);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:22px;
+  overflow-x:hidden;
+}
+
+button,input {
+  font:inherit;
+}
+
+button {
+  border:0;
+  border-radius:15px;
+  padding:13px 20px;
+  background:linear-gradient(135deg,var(--pink),var(--deep));
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 7px 18px #e94b9630;
+  transition:.2s;
+}
+
+button:hover {
+  transform:translateY(-2px);
+  filter:saturate(1.1);
+}
+
+button:disabled {
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.secondary {
+  background:#fff;
+  color:var(--deep);
+  border:2px solid #ffd0e4;
+  box-shadow:none;
+}
+
+.app {
+  width:min(760px,100%);
+  background:#ffffffeb;
+  border:1px solid #fff;
+  border-radius:28px;
+  padding:clamp(20px,5vw,42px);
+  box-shadow:0 22px 70px #9d5b8024;
+  position:relative;
+  overflow:hidden;
+}
+
+.app:before {
+  content:"";
+  position:absolute;
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  background:#ffe5f1;
+  right:-105px;
+  top:-110px;
+  z-index:0;
+}
+
+.content {
+  position:relative;
+  z-index:1;
+}
+
+.topline {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.logo {
+  font-size:13px;
+  letter-spacing:2px;
+  font-weight:900;
+  color:var(--deep);
+}
+
+.sound {
+  padding:9px 13px;
+  font-size:13px;
+}
+
+h1 {
+  font-size:clamp(32px,7vw,54px);
+  line-height:1.02;
+  margin:12px 0;
+  color:#d93682;
+}
+
+h2 {
+  font-size:clamp(24px,5vw,34px);
+  margin:8px 0 12px;
+}
+
+p {
+  line-height:1.6;
+}
+
+.muted {
+  color:#8c7182;
+}
+
+.center {
+  text-align:center;
+}
+
+.emoji {
+  font-size:54px;
+  margin:8px;
+}
+
+input {
+  width:100%;
+  padding:15px 16px;
+  border:2px solid #f5c7dc;
+  border-radius:14px;
+  outline:none;
+  margin:10px 0 16px;
+  background:#fffafd;
+}
+
+input:focus {
+  border-color:var(--pink);
+  box-shadow:0 0 0 4px #ff5fa21c;
+}
+
+.progress-wrap {
+  height:11px;
+  background:#f8dce9;
+  border-radius:99px;
+  overflow:hidden;
+  margin:18px 0 8px;
+}
+
+.progress {
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#ff9bc6,#d93682);
+  border-radius:99px;
+  transition:width .45s ease;
+}
+
+.progress-label {
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  color:#98788b;
+}
+
+.question {
+  font-size:clamp(22px,4.5vw,30px);
+  font-weight:900;
+  margin:24px 0;
+}
+
+.answers {
+  display:grid;
+  gap:12px;
+}
+
+.answer {
+  width:100%;
+  text-align:left;
+  background:#fff5fa;
+  color:#5a344b;
+  border:2px solid #f7d5e5;
+  box-shadow:none;
+  padding:16px;
+  border-radius:16px;
+  font-weight:700;
+}
+
+.answer:hover {
+  background:#ffe8f3;
+  border-color:#ff8fbd;
+}
+
+.answer.selected {
+  background:#ffe0ef;
+  border-color:var(--pink);
+}
+
+.row {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:22px;
+}
+
+.hidden {
+  display:none!important;
+}
+
+.result-card {
+  background:linear-gradient(145deg,#fff1f8,#f5edff);
+  border:2px solid #ffd2e6;
+  border-radius:24px;
+  padding:25px;
+  margin:20px 0;
+}
+
+.personality-emoji {
+  font-size:64px;
+}
+
+.personality-name {
+  font-size:clamp(27px,6vw,40px);
+  font-weight:1000;
+  color:#d93682;
+  margin:8px 0;
+}
+
+.result-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  text-align:left;
+  margin-top:18px;
+}
+
+.info {
+  background:#ffffffc9;
+  padding:14px;
+  border-radius:15px;
+}
+
+.info b {
+  display:block;
+  color:#bd3979;
+  margin-bottom:5px;
+}
+
+.small {
+  font-size:13px;
+}
+
+.panel {
+  background:#fff6fa;
+  border:1px solid #f6d5e5;
+  padding:16px;
+  border-radius:17px;
+  margin:12px 0;
+  overflow-x:auto;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  text-align:left;
+}
+
+th,td {
+  padding:11px 8px;
+  border-bottom:1px solid #f2d8e5;
+}
+
+th {
+  color:#bd3979;
+  font-size:13px;
+}
+
+td {
+  font-size:14px;
+}
+
+.rank {
+  font-weight:900;
+  color:#d93682;
+}
+
+.footer {
+  margin-top:22px;
+  text-align:center;
+  color:#a78b9b;
+  font-size:12px;
+}
+
+.toast {
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#43283a;
+  color:white;
+  padding:12px 18px;
+  border-radius:30px;
+  z-index:10;
+  box-shadow:0 8px 30px #0002;
+}
+
+.confetti {
+  position:fixed;
+  top:-15px;
+  width:9px;
+  height:14px;
+  z-index:20;
+  pointer-events:none;
+  animation:fall 2.8s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform:translateY(110vh) rotate(760deg);
+    opacity:.2;
+  }
+}
+
+.pop {
+  animation:pop .55s ease both;
+}
+
+@keyframes pop {
+  0% {transform:scale(.75);opacity:0}
+  70% {transform:scale(1.04)}
+  100% {transform:scale(1);opacity:1}
+}
+
+/* FOOTER BELOW THE GAME */
+
+.site-footer {
+  width:min(760px,100%);
+  margin:20px auto 0;
+  padding:20px 12px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  text-align:center;
+}
+
+.site-footer a {
+  color:#d93682;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+}
+
+.site-footer a:hover {
+  text-decoration:underline;
+}
+
+/* MOBILE RESPONSIVE DESIGN */
+
+@media(max-width:520px) {
 
   body {
-    width: 100%;
-    overflow-x: hidden;
+    padding:12px;
   }
 
-  .container,
-  .game-container,
-  main {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    box-sizing: border-box;
+  .app {
+    width:100%;
+    padding:18px;
+    border-radius:22px;
   }
 
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
+  .topline {
+    align-items:center;
+    gap:8px;
   }
 
-  nav a {
-    font-size: 13px;
-    padding: 8px 10px;
+  .logo {
+    font-size:11px;
+    letter-spacing:1px;
   }
 
-  img {
-    max-width: 100%;
-    height: auto;
+  .sound {
+    padding:8px 10px;
+    font-size:11px;
+  }
+
+  .result-grid {
+    grid-template-columns:1fr;
+  }
+
+  .row button {
+    max-width:100%;
+  }
+
+  .site-footer {
+    flex-direction:column;
+    gap:15px;
+    padding:18px 10px;
+  }
+
+  .panel {
+    padding:10px;
+  }
+
+  th,td {
+    padding:9px 6px;
   }
 }
 </style>
 </head>
+
 <body>
+
 <main class="app">
 <div class="content">
-  <div class="topline">
-    <div class="logo">THE FUNNY YOU 😂💗</div>
-    <button class="secondary sound" id="soundBtn" onclick="toggleSound()">🔊 Sound ON</button>
+
+<div class="topline">
+  <div class="logo">THE FUNNY YOU 😂💗</div>
+  <button class="secondary sound" id="soundBtn" onclick="toggleSound()">🔊 Sound ON</button>
+</div>
+
+<section id="welcome" class="center">
+  <div class="emoji">🎀😂✨</div>
+  <h1>THE FUNNY YOU</h1>
+  <h2>Which chaotic personality are you?</h2>
+  <p class="muted">A funny little quiz that exposes your dramatic, iconic and completely unexpected side.</p>
+  <label for="playerName"><b>First, what should we call you?</b></label>
+  <input id="playerName" maxlength="24" placeholder="Enter your name..." autocomplete="off">
+  <button onclick="startQuiz()">LET'S FIND OUT ✨</button>
+  <div class="row">
+    <button class="secondary" onclick="showLeaderboard()">🏆 Leaderboard</button>
+    <button class="secondary" onclick="showHistory()">📋 Player History</button>
+  </div>
+</section>
+
+<section id="quiz" class="hidden">
+  <div class="progress-label">
+    <span id="questionCount">Question 1 of 10</span>
+    <span id="percent">10%</span>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress" id="progress"></div>
+  </div>
+  <div class="question" id="questionText"></div>
+  <div class="answers" id="answers"></div>
+  <div class="row">
+    <button class="secondary" onclick="goHome()">Exit quiz</button>
+    <button id="nextBtn" onclick="nextQuestion()" disabled>Next question →</button>
+  </div>
+</section>
+
+<section id="result" class="hidden center">
+  <div class="emoji">🥁✨</div>
+  <h2 id="resultHeading">The results are in!</h2>
+
+  <div class="result-card pop" id="shareCard">
+    <div class="personality-emoji" id="resultEmoji"></div>
+    <div class="small muted" id="resultPlayer"></div>
+    <div class="personality-name" id="resultName"></div>
+    <p id="resultDescription"></p>
+
+    <div class="result-grid">
+      <div class="info"><b>✨ Your superpower</b><span id="strength"></span></div>
+      <div class="info"><b>🤭 Your signature move</b><span id="habit"></span></div>
+      <div class="info"><b>🎯 Secret talent</b><span id="talent"></span></div>
+      <div class="info"><b>🎬 Your life title</b><span id="movie"></span></div>
+    </div>
+
+    <p class="small muted" style="margin-bottom:0">THE FUNNY YOU • Personality quiz</p>
   </div>
 
-  <section id="welcome" class="center">
-    <div class="emoji">🎀😂✨</div>
-    <h1>THE FUNNY YOU</h1>
-    <h2>Which chaotic personality are you?</h2>
-    <p class="muted">A funny little quiz that exposes your dramatic, iconic and completely unexpected side.</p>
-    <label for="playerName"><b>First, what should we call you?</b></label>
-    <input id="playerName" maxlength="24" placeholder="Enter your name..." autocomplete="off">
-    <button onclick="startQuiz()">LET'S FIND OUT ✨</button>
-    <div class="row">
-      <button class="secondary" onclick="showLeaderboard()">🏆 Leaderboard</button>
-      <button class="secondary" onclick="showHistory()">📋 Player History</button>
-    </div>
-  </section>
+  <p id="resultExtra" class="muted"></p>
 
-  <section id="quiz" class="hidden">
-    <div class="progress-label"><span id="questionCount">Question 1 of 10</span><span id="percent">10%</span></div>
-    <div class="progress-wrap"><div class="progress" id="progress"></div></div>
-    <div class="question" id="questionText"></div>
-    <div class="answers" id="answers"></div>
-    <div class="row">
-      <button class="secondary" onclick="goHome()">Exit quiz</button>
-      <button id="nextBtn" onclick="nextQuestion()" disabled>Next question →</button>
-    </div>
-  </section>
+  <div class="row">
+    <button onclick="shareResult()">📤 Share my result</button>
+    <button class="secondary" onclick="showLeaderboard()">🏆 Leaderboard</button>
+    <button class="secondary" onclick="restart()">Play again 🔁</button>
+  </div>
 
-  <section id="result" class="hidden center">
-    <div class="emoji">🥁✨</div>
-    <h2 id="resultHeading">The results are in!</h2>
-    <div class="result-card pop" id="shareCard">
-      <div class="personality-emoji" id="resultEmoji"></div>
-      <div class="small muted" id="resultPlayer"></div>
-      <div class="personality-name" id="resultName"></div>
-      <p id="resultDescription"></p>
-      <div class="result-grid">
-        <div class="info"><b>✨ Your superpower</b><span id="strength"></span></div>
-        <div class="info"><b>🤭 Your signature move</b><span id="habit"></span></div>
-        <div class="info"><b>🎯 Secret talent</b><span id="talent"></span></div>
-        <div class="info"><b>🎬 Your life title</b><span id="movie"></span></div>
-      </div>
-      <p class="small muted" style="margin-bottom:0">THE FUNNY YOU • Personality quiz</p>
-    </div>
-    <p id="resultExtra" class="muted"></p>
-    <div class="row">
-      <button onclick="shareResult()">📤 Share my result</button>
-      <button class="secondary" onclick="showLeaderboard()">🏆 Leaderboard</button>
-      <button class="secondary" onclick="restart()">Play again 🔁</button>
-    </div>
-    <div class="row"><button class="secondary" onclick="goHome()">Home</button></div>
-  </section>
+  <div class="row">
+    <button class="secondary" onclick="goHome()">Home</button>
+  </div>
+</section>
 
-  <section id="leaderboard" class="hidden">
-    <div class="center"><div class="emoji">🏆</div><h2>Funny Hall of Fame</h2><p class="muted">The players and their legendary personalities.</p></div>
-    <div id="leaderboardContent" class="panel"></div>
-    <div class="row"><button onclick="goHome()">Home</button><button class="secondary" onclick="showHistory()">Player history</button></div>
-  </section>
+<section id="leaderboard" class="hidden">
+  <div class="center">
+    <div class="emoji">🏆</div>
+    <h2>Funny Hall of Fame</h2>
+    <p class="muted">The players and their legendary personalities.</p>
+  </div>
+  <div id="leaderboardContent" class="panel"></div>
+  <div class="row">
+    <button onclick="goHome()">Home</button>
+    <button class="secondary" onclick="showHistory()">Player history</button>
+  </div>
+</section>
 
-  <section id="history" class="hidden">
-    <div class="center"><div class="emoji">📚</div><h2>Player History</h2><p class="muted">Everyone who has played on this browser.</p></div>
-    <div id="historyContent" class="panel"></div>
-    <div class="row"><button onclick="goHome()">Home</button><button class="secondary" onclick="showLeaderboard()">Leaderboard</button><button class="secondary" onclick="clearHistory()">Clear history</button></div>
-  </section>
-  <div class="footer">Made for laughs, not serious personality science 💗</div>
+<section id="history" class="hidden">
+  <div class="center">
+    <div class="emoji">📚</div>
+    <h2>Player History</h2>
+    <p class="muted">Everyone who has played on this browser.</p>
+  </div>
+  <div id="historyContent" class="panel"></div>
+  <div class="row">
+    <button onclick="goHome()">Home</button>
+    <button class="secondary" onclick="showLeaderboard()">Leaderboard</button>
+    <button class="secondary" onclick="clearHistory()">Clear history</button>
+  </div>
+</section>
+
+<div class="footer">Made for laughs, not serious personality science 💗</div>
+
 </div>
 </main>
-<script>
-const personalities = {
-  boss:{name:"Born Leader",emoji:"👑",description:"You naturally take charge. Even when nobody asked, you somehow become the CEO of the situation. Confidence? Unlimited.",strength:"Making decisions and motivating people.",habit:"Saying “Okay, everyone listen” and making a plan.",talent:"Turning a messy situation into a mission.",movie:"The Boss Has Entered"},
-  comedian:{name:"Walking Comedy",emoji:"😂",description:"You are the human version of a funny notification. You can turn an ordinary moment into a story everyone repeats.",strength:"Making people laugh and lifting the mood.",habit:"Laughing at your own joke before finishing it.",talent:"Finding comedy in absolutely anything.",movie:"I Came, I Saw, I Made It Awkward"},
-  overthinker:{name:"Overthinking Champion",emoji:"🧠",description:"Your brain has 47 tabs open, 12 are playing music, and one is replaying something you said three years ago.",strength:"Noticing details and thinking deeply.",habit:"Creating 15 possible meanings from one message.",talent:"Spotting tiny details others miss.",movie:"What If… Wait, What If Not?"},
-  dreamer:{name:"Dreamy Daydreamer",emoji:"☁️",description:"Your imagination has its own luxury apartment. You can turn a five-minute break into a whole imaginary movie.",strength:"Creativity and seeing possibilities.",habit:"Staring into space while your brain makes a film.",talent:"Coming up with original ideas.",movie:"Somewhere in My Imagination"},
-  detective:{name:"Secret Detective",emoji:"🕵️",description:"Nothing gets past you. You notice the tiny clues, remember the details and quietly connect the dots like a mystery expert.",strength:"Observation and curiosity.",habit:"Asking “Wait… but why?” about everything.",talent:"Connecting clues and solving puzzles.",movie:"The Case of the Missing Context"},
-  princess:{name:"Drama Queen",emoji:"💅",description:"Every small event deserves a soundtrack, a dramatic pause and a perfect reaction. You bring main-character energy to regular Tuesdays.",strength:"Expressing yourself and adding excitement.",habit:"Reacting like a plot twist just happened.",talent:"Making ordinary moments memorable.",movie:"Too Glam to Be Calm"},
-  observer:{name:"Silent Observer",emoji:"👀",description:"You may be quiet, but you are definitely noticing everything. You watch the whole situation before choosing your iconic moment.",strength:"Patience and reading the room.",habit:"Knowing what happened without asking anyone.",talent:"Understanding situations from the sidelines.",movie:"I Saw Everything"},
-  chaos:{name:"Chaos Creator",emoji:"🤪",description:"Plans? Maybe. Surprises? Definitely. Your energy is unpredictable in the funniest way, and boring is simply not in your vocabulary.",strength:"Being spontaneous and adaptable.",habit:"Starting one thing and somehow doing five others.",talent:"Making any moment an adventure.",movie:"Oops… We Did It Again"}
-};
-const questions = [
- {q:"If you start talking in your sleep, what would you most likely say?",a:[["“Everyone, follow my plan!”","boss"],["“HAHAHA, you won't believe this!”","comedian"],["“Wait… did I lock the door?”","overthinker"],["“And then the princess entered…”","dreamer"],["“I know who did it…”","detective"],["“Where is my royal crown?”","princess"],["(Says nothing, but somehow knows everything)","observer"],["“Let's do something random!”","chaos"]]},
- {q:"Your friend says “I have a secret.” Your reaction?",a:[["“Tell me. I can handle it.”","boss"],["“Is it about me being hilarious?”","comedian"],["“Why? What happened? Are you okay?”","overthinker"],["“I hope it's something magical.”","dreamer"],["“I KNEW something was going on.”","detective"],["“Wait, sit down. Start from the beginning.”","princess"],["Just listen carefully and notice every detail.","observer"],["“OMG TELL ME RIGHT NOW!”","chaos"]]},
- {q:"You accidentally wave at someone who wasn't waving at you. What now?",a:[["Act like you were greeting the whole room.","boss"],["Turn it into a comedy performance.","comedian"],["Think about it for the next 6 business days.","overthinker"],["Pretend it was a scene from a movie.","dreamer"],["Investigate who they were actually waving at.","detective"],["Smile like it was totally intentional.","princess"],["Quietly observe if anyone noticed.","observer"],["Wave again. Make it a whole event.","chaos"]]},
- {q:"Your life suddenly gets a background soundtrack. Which one?",a:[["A powerful victory theme.","boss"],["A comedy show intro.","comedian"],["Suspense music for every tiny decision.","overthinker"],["A dreamy magical melody.","dreamer"],["A mysterious detective theme.","detective"],["A dramatic entrance soundtrack.","princess"],["A calm, mysterious instrumental.","observer"],["A song that changes every 10 seconds.","chaos"]]},
- {q:"At a group project, what role do you accidentally get?",a:[["The manager. Obviously.","boss"],["The one making everyone laugh.","comedian"],["The one checking every detail 10 times.","overthinker"],["The idea person who imagines the final result.","dreamer"],["The one who finds everyone's missing information.","detective"],["The presentation star.","princess"],["The quiet person who notices the mistakes.","observer"],["The one who changes the plan halfway through.","chaos"]]},
- {q:"You find a mysterious box with a note saying “Do not open.”",a:[["Call everyone and decide what to do.","boss"],["Ask if it contains snacks.","comedian"],["Read the note 20 times and consider every possibility.","overthinker"],["Imagine a magical world inside.","dreamer"],["Look for clues around the box.","detective"],["Open it only after a dramatic countdown.","princess"],["Wait and watch what others do.","observer"],["“Well, now I HAVE to know.”","chaos"]]},
- {q:"Which message are you most likely to send?",a:[["“Here's the plan.”","boss"],["“I can't stop laughing 😂”","comedian"],["“Sorry, one more question…”","overthinker"],["“Imagine if we could…”","dreamer"],["“I found something interesting.”","detective"],["“You will NOT believe what happened.”","princess"],["“I noticed something.”","observer"],["“GUYS. NEW IDEA.”","chaos"]]},
- {q:"You get one unexpected free afternoon. What happens?",a:[["Organise everything I've been planning.","boss"],["Make everyone laugh and have fun.","comedian"],["Make a list, then rethink the list.","overthinker"],["Daydream, create or explore something new.","dreamer"],["Solve a mystery or learn something curious.","detective"],["Have a main-character kind of day.","princess"],["Enjoy a peaceful moment and people-watch.","observer"],["Say yes to a spontaneous adventure.","chaos"]]},
- {q:"If your friends gave you a nickname, it would be…",a:[["The CEO","boss"],["The Meme Machine","comedian"],["The 3 AM Thinker","overthinker"],["Cloud Nine","dreamer"],["Sherlock","detective"],["The Main Character","princess"],["The Human CCTV","observer"],["Plot Twist","chaos"]]},
- {q:"Choose your most honest superpower:",a:[["Getting things done.","boss"],["Making people laugh.","comedian"],["Thinking of every possibility.","overthinker"],["Imagining amazing things.","dreamer"],["Noticing hidden details.","detective"],["Making an entrance.","princess"],["Reading the room quietly.","observer"],["Making boring days interesting.","chaos"]]}
-];
-let order=[],answers=[],current=0,player="",lastResult=null,soundOn=true,audioCtx=null;
-const $=id=>document.getElementById(id);
-function show(id){["welcome","quiz","result","leaderboard","history"].forEach(x=>$(x).classList.toggle("hidden",x!==id))}
-function playTone(freq=550,duration=.09,type="sine"){
- if(!soundOn)return;
- try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.07,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+duration)}catch(e){}
-}
-function toggleSound(){soundOn=!soundOn;$("soundBtn").textContent=soundOn?"🔊 Sound ON":"🔇 Sound OFF";if(soundOn)playTone(660)}
-function startQuiz(){
- player=$("playerName").value.trim();if(!player){alert("Please enter your name first! 💗");$("playerName").focus();return}
- order=questions.map((_,i)=>i);for(let i=order.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
- answers=Array(questions.length).fill(null);current=0;show("quiz");renderQuestion();playTone(600)
-}
-function renderQuestion(){
- const q=questions[order[current]];$("questionCount").textContent=`Question ${current+1} of ${questions.length}`;$("percent").textContent=`${Math.round((current+1)/questions.length*100)}%`;$("progress").style.width=`${(current+1)/questions.length*100}%`;$("questionText").textContent=q.q;$("answers").innerHTML="";$("nextBtn").disabled=answers[current]===null;$("nextBtn").textContent=current===questions.length-1?"Reveal my personality ✨":"Next question →";
- q.a.forEach(([label,type],i)=>{const b=document.createElement("button");b.className="answer"+(answers[current]===type?" selected":"");b.textContent=String.fromCharCode(65+i)+". "+label;b.onclick=()=>{answers[current]=type;document.querySelectorAll(".answer").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("nextBtn").disabled=false;playTone(480+i*35,.07)};$("answers").appendChild(b)});
-}
-function nextQuestion(){if(answers[current]===null)return;playTone(620);if(current<questions.length-1){current++;renderQuestion()}else finishQuiz()}
-function finishQuiz(){
- const counts={};answers.forEach(x=>counts[x]=(counts[x]||0)+1);const winner=Object.keys(counts).sort((a,b)=>counts[b]-counts[a])[0];lastResult={player,type:winner,counts,date:new Date().toLocaleString()};const p=personalities[winner];
- $("resultPlayer").textContent=`${player}'s personality is…`;$("resultEmoji").textContent=p.emoji;$("resultName").textContent=p.name;$("resultDescription").textContent=p.description;$("strength").textContent=p.strength;$("habit").textContent=p.habit;$("talent").textContent=p.talent;$("movie").textContent=p.movie;$("resultExtra").textContent=`You got ${counts[winner]} answer${counts[winner]===1?"":"s"} matching this personality. Your answers made this result!`;
- const list=getPlayers();list.push(lastResult);localStorage.setItem("funnyYouPlayers",JSON.stringify(list));show("result");confetti();[660,780,920].forEach((f,i)=>setTimeout(()=>playTone(f,.16,"triangle"),i*130));
-}
-function confetti(){const chars=["💗","✨","🎉","🌸","⭐"];for(let i=0;i<65;i++){const el=document.createElement("div");el.className="confetti";el.textContent=chars[Math.floor(Math.random()*chars.length)];el.style.left=Math.random()*100+"vw";el.style.animationDelay=Math.random()*.8+"s";el.style.fontSize=(12+Math.random()*13)+"px";document.body.appendChild(el);setTimeout(()=>el.remove(),3600)}}
-function getPlayers(){try{return JSON.parse(localStorage.getItem("funnyYouPlayers")||"[]")}catch(e){return []}}
-function showLeaderboard(){const list=getPlayers();const sorted=[...list].sort((a,b)=>Object.values(b.counts||{}).sort((x,y)=>y-x)[0]-Object.values(a.counts||{}).sort((x,y)=>y-x)[0]);$("leaderboardContent").innerHTML=sorted.length?`<table><thead><tr><th>#</th><th>Player</th><th>Personality</th><th>Top score</th></tr></thead><tbody>${sorted.map((x,i)=>`<tr><td class="rank">${i+1}</td><td>${escapeHTML(x.player)}</td><td>${personalities[x.type]?.emoji||""} ${personalities[x.type]?.name||x.type}</td><td>${Math.max(...Object.values(x.counts||{score:0}))}/10</td></tr>`).join("")}</tbody></table>`:"No players yet. Be the first to play! 💗";show("leaderboard")}
-function showHistory(){const list=getPlayers().slice().reverse();$("historyContent").innerHTML=list.length?`<table><thead><tr><th>Player</th><th>Personality</th><th>Date played</th></tr></thead><tbody>${list.map(x=>`<tr><td>${escapeHTML(x.player)}</td><td>${personalities[x.type]?.emoji||""} ${personalities[x.type]?.name||x.type}</td><td class="small">${escapeHTML(x.date||"")}</td></tr>`).join("")}</tbody></table>`:"No history yet. Play the quiz first!";show("history")}
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function clearHistory(){if(confirm("Are you sure you want to clear all player history on this browser?")){localStorage.removeItem("funnyYouPlayers");showHistory()}}
-function shareResult(){
- if(!lastResult)return;const p=personalities[lastResult.type];const text=`😂 THE FUNNY YOU 💗\n${lastResult.player} is: ${p.emoji} ${p.name}\n${p.description}\nPlay the quiz and discover your personality!`;
- if(navigator.share){navigator.share({title:"THE FUNNY YOU",text}).catch(()=>{})}else if(navigator.clipboard?.writeText){navigator.clipboard.writeText(text).then(()=>toast("Result copied! Paste it anywhere 💗")).catch(()=>toast("Sharing isn't available in this browser."))}else{toast("Sharing isn't supported in this browser.")}
-}
-function toast(msg){const el=document.createElement("div");el.className="toast";el.textContent=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),2500)}
-function restart(){$("playerName").value=player;startQuiz()}
-function goHome(){show("welcome")}
-</script><footer style="text-align:center; padding:20px;">
-    <a href="privacy-policy.html">Privacy Policy</a>
-&nbsp; | &nbsp;
-<a href="terms-and-conditions.html">Terms & Conditions</a>
-&nbsp; | &nbsp;
-<a href="about.html">About Us</a>
+
+<!-- WEBSITE LINKS BELOW THE GAME -->
+
+<footer class="site-footer">
+  <a href="privacy-policy.html">Privacy Policy</a>
+  <a href="terms-and-conditions.html">Terms & Conditions</a>
+  <a href="about.html">About Us</a>
 </footer>
+
+<script>
+
+const personalities = {
+boss:{name:"Born Leader",emoji:"👑",description:"You naturally take charge. Even when nobody asked, you somehow become the CEO of the situation. Confidence? Unlimited.",strength:"Making decisions and motivating people.",habit:"Saying “Okay, everyone listen” and making a plan.",talent:"Turning a messy situation into a mission.",movie:"The Boss Has Entered"},
+comedian:{name:"Walking Comedy",emoji:"😂",description:"You are the human version of a funny notification. You can turn an ordinary moment into a story everyone repeats.",strength:"Making people laugh and lifting the mood.",habit:"Laughing at your own joke before finishing it.",talent:"Finding comedy in absolutely anything.",movie:"I Came, I Saw, I Made It Awkward"},
+overthinker:{name:"Overthinking Champion",emoji:"🧠",description:"Your brain has 47 tabs open, 12 are playing music, and one is replaying something you said three years ago.",strength:"Noticing details and thinking deeply.",habit:"Creating 15 possible meanings from one message.",talent:"Spotting tiny details others miss.",movie:"What If… Wait, What If Not?"},
+dreamer:{name:"Dreamy Daydreamer",emoji:"☁️",description:"Your imagination has its own luxury apartment. You can turn a five-minute break into a whole imaginary movie.",strength:"Creativity and seeing possibilities.",habit:"Staring into space while your brain makes a film.",talent:"Coming up with original ideas.",movie:"Somewhere in My Imagination"},
+detective:{name:"Secret Detective",emoji:"🕵️",description:"Nothing gets past you. You notice the tiny clues, remember the details and quietly connect the dots like a mystery expert.",strength:"Observation and curiosity.",habit:"Asking “Wait… but why?” about everything.",talent:"Connecting clues and solving puzzles.",movie:"The Case of the Missing Context"},
+princess:{name:"Drama Queen",emoji:"💅",description:"Every small event deserves a soundtrack, a dramatic pause and a perfect reaction. You bring main-character energy to regular Tuesdays.",strength:"Expressing yourself and adding excitement.",habit:"Reacting like a plot twist just happened.",talent:"Making ordinary moments memorable.",movie:"Too Glam to Be Calm"},
+observer:{name:"Silent Observer",emoji:"👀",description:"You may be quiet, but you are definitely noticing everything. You watch the whole situation before choosing your iconic moment.",strength:"Patience and reading the room.",habit:"Knowing what happened without asking anyone.",talent:"Understanding situations from the sidelines.",movie:"I Saw Everything"},
+chaos:{name:"Chaos Creator",emoji:"🤪",description:"Plans? Maybe. Surprises? Definitely. Your energy is unpredictable in the funniest way, and boring is simply not in your vocabulary.",strength:"Being spontaneous and adaptable.",habit:"Starting one thing and somehow doing five others.",talent:"Making any moment an adventure.",movie:"Oops… We Did It Again"}
+};
+
+const questions = [
+{q:"If you start talking in your sleep, what would you most likely say?",a:[["“Everyone, follow my plan!”","boss"],["“HAHAHA, you won't believe this!”","comedian"],["“Wait… did I lock the door?”","overthinker"],["“And then the princess entered…”","dreamer"],["“I know who did it…”","detective"],["“Where is my royal crown?”","princess"],["(Says nothing, but somehow knows everything)","observer"],["“Let's do something random!”","chaos"]]},
+{q:"Your friend says “I have a secret.” Your reaction?",a:[["“Tell me. I can handle it.”","boss"],["“Is it about me being hilarious?”","comedian"],["“Why? What happened? Are you okay?”","overthinker"],["“I hope it's something magical.”","dreamer"],["“I KNEW something was going on.”","detective"],["“Wait, sit down. Start from the beginning.”","princess"],["Just listen carefully and notice every detail.","observer"],["“OMG TELL ME RIGHT NOW!”","chaos"]]},
+{q:"You accidentally wave at someone who wasn't waving at you. What now?",a:[["Act like you were greeting the whole room.","boss"],["Turn it into a comedy performance.","comedian"],["Think about it for the next 6 business days.","overthinker"],["Pretend it was a scene from a movie.","dreamer"],["Investigate who they were actually waving at.","detective"],["Smile like it was totally intentional.","princess"],["Quietly observe if anyone noticed.","observer"],["Wave again. Make it a whole event.","chaos"]]},
+{q:"Your life suddenly gets a background soundtrack. Which one?",a:[["A powerful victory theme.","boss"],["A comedy show intro.","comedian"],["Suspense music for every tiny decision.","overthinker"],["A dreamy magical melody.","dreamer"],["A mysterious detective theme.","detective"],["A dramatic entrance soundtrack.","princess"],["A calm, mysterious instrumental.","observer"],["A song that changes every 10 seconds.","chaos"]]},
+{q:"At a group project, what role do you accidentally get?",a:[["The manager. Obviously.","boss"],["The one making everyone laugh.","comedian"],["The one checking every detail 10 times.","overthinker"],["The idea person who imagines the final result.","dreamer"],["The one who finds everyone's missing information.","detective"],["The presentation star.","princess"],["The quiet person who notices the mistakes.","observer"],["The one who changes the plan halfway through.","chaos"]]},
+{q:"You find a mysterious box with a note saying “Do not open.”",a:[["Call everyone and decide what to do.","boss"],["Ask if it contains snacks.","comedian"],["Read the note 20 times and consider every possibility.","overthinker"],["Imagine a magical world inside.","dreamer"],["Look for clues around the box.","detective"],["Open it only after a dramatic countdown.","princess"],["Wait and watch what others do.","observer"],["“Well, now I HAVE to know.”","chaos"]]},
+{q:"Which message are you most likely to send?",a:[["“Here's the plan.”","boss"],["“I can't stop laughing 😂”","comedian"],["“Sorry, one more question…”","overthinker"],["“Imagine if we could…”","dreamer"],["“I found something interesting.”","detective"],["“You will NOT believe what happened.”","princess"],["“I noticed something.”","observer"],["“GUYS. NEW IDEA.”","chaos"]]},
+{q:"You get one unexpected free afternoon. What happens?",a:[["Organise everything I've been planning.","boss"],["Make everyone laugh and have fun.","comedian"],["Make a list, then rethink the list.","overthinker"],["Daydream, create or explore something new.","dreamer"],["Solve a mystery or learn something curious.","detective"],["Have a main-character kind of day.","princess"],["Enjoy a peaceful moment and people-watch.","observer"],["Say yes to a spontaneous adventure.","chaos"]]},
+{q:"If your friends gave you a nickname, it would be…",a:[["The CEO","boss"],["The Meme Machine","comedian"],["The 3 AM Thinker","overthinker"],["Cloud Nine","dreamer"],["Sherlock","detective"],["The Main Character","princess"],["The Human CCTV","observer"],["Plot Twist","chaos"]]},
+{q:"Choose your most honest superpower:",a:[["Getting things done.","boss"],["Making people laugh.","comedian"],["Thinking of every possibility.","overthinker"],["Imagining amazing things.","dreamer"],["Noticing hidden details.","detective"],["Making an entrance.","princess"],["Reading the room quietly.","observer"],["Making boring days interesting.","chaos"]]}
+];
+
+let order=[],answers=[],current=0,player="",lastResult=null,soundOn=true,audioCtx=null;
+
+const $=id=>document.getElementById(id);
+
+function show(id){
+["welcome","quiz","result","leaderboard","history"].forEach(x=>$(x).classList.toggle("hidden",x!==id));
+}
+
+function playTone(freq=550,duration=.09,type="sine"){
+if(!soundOn)return;
+try{
+audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+o.type=type;
+o.frequency.value=freq;
+g.gain.setValueAtTime(.07,audioCtx.currentTime);
+g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);
+o.connect(g);
+g.connect(audioCtx.destination);
+o.start();
+o.stop(audioCtx.currentTime+duration);
+}catch(e){}
+}
+
+function toggleSound(){
+soundOn=!soundOn;
+$("soundBtn").textContent=soundOn?"🔊 Sound ON":"🔇 Sound OFF";
+if(soundOn)playTone(660);
+}
+
+function startQuiz(){
+player=$("playerName").value.trim();
+if(!player){
+alert("Please enter your name first! 💗");
+$("playerName").focus();
+return;
+}
+order=questions.map((_,i)=>i);
+for(let i=order.length-1;i>0;i--){
+let j=Math.floor(Math.random()*(i+1));
+[order[i],order[j]]=[order[j],order[i]];
+}
+answers=Array(questions.length).fill(null);
+current=0;
+show("quiz");
+renderQuestion();
+playTone(600);
+}
+
+function renderQuestion(){
+const q=questions[order[current]];
+$("questionCount").textContent=`Question ${current+1} of ${questions.length}`;
+$("percent").textContent=`${Math.round((current+1)/questions.length*100)}%`;
+$("progress").style.width=`${(current+1)/questions.length*100}%`;
+$("questionText").textContent=q.q;
+$("answers").innerHTML="";
+$("nextBtn").disabled=answers[current]===null;
+$("nextBtn").textContent=current===questions.length-1?"Reveal my personality ✨":"Next question →";
+
+q.a.forEach(([label,type],i)=>{
+const b=document.createElement("button");
+b.className="answer"+(answers[current]===type?" selected":"");
+b.textContent=String.fromCharCode(65+i)+". "+label;
+b.onclick=()=>{
+answers[current]=type;
+document.querySelectorAll(".answer").forEach(x=>x.classList.remove("selected"));
+b.classList.add("selected");
+$("nextBtn").disabled=false;
+playTone(480+i*35,.07);
+};
+$("answers").appendChild(b);
+});
+}
+
+function nextQuestion(){
+if(answers[current]===null)return;
+playTone(620);
+if(current<questions.length-1){
+current++;
+renderQuestion();
+}else{
+finishQuiz();
+}
+}
+
+function finishQuiz(){
+const counts={};
+answers.forEach(x=>counts[x]=(counts[x]||0)+1);
+const winner=Object.keys(counts).sort((a,b)=>counts[b]-counts[a])[0];
+lastResult={player,type:winner,counts,date:new Date().toLocaleString()};
+const p=personalities[winner];
+
+$("resultPlayer").textContent=`${player}'s personality is…`;
+$("resultEmoji").textContent=p.emoji;
+$("resultName").textContent=p.name;
+$("resultDescription").textContent=p.description;
+$("strength").textContent=p.strength;
+$("habit").textContent=p.habit;
+$("talent").textContent=p.talent;
+$("movie").textContent=p.movie;
+$("resultExtra").textContent=`You got ${counts[winner]} answer${counts[winner]===1?"":"s"} matching this personality. Your answers made this result!`;
+
+const list=getPlayers();
+list.push(lastResult);
+localStorage.setItem("funnyYouPlayers",JSON.stringify(list));
+show("result");
+confetti();
+[660,780,920].forEach((f,i)=>setTimeout(()=>playTone(f,.16,"triangle"),i*130));
+}
+
+function confetti(){
+const chars=["💗","✨","🎉","🌸","⭐"];
+for(let i=0;i<65;i++){
+const el=document.createElement("div");
+el.className="confetti";
+el.textContent=chars[Math.floor(Math.random()*chars.length)];
+el.style.left=Math.random()*100+"vw";
+el.style.animationDelay=Math.random()*.8+"s";
+el.style.fontSize=(12+Math.random()*13)+"px";
+document.body.appendChild(el);
+setTimeout(()=>el.remove(),3600);
+}
+}
+
+function getPlayers(){
+try{
+return JSON.parse(localStorage.getItem("funnyYouPlayers")||"[]");
+}catch(e){
+return [];
+}
+}
+
+function showLeaderboard(){
+const list=getPlayers();
+const sorted=[...list].sort((a,b)=>Object.values(b.counts||{}).sort((x,y)=>y-x)[0]-Object.values(a.counts||{}).sort((x,y)=>y-x)[0]);
+
+$("leaderboardContent").innerHTML=sorted.length?
+`<table><thead><tr><th>#</th><th>Player</th><th>Personality</th><th>Top score</th></tr></thead><tbody>${sorted.map((x,i)=>`<tr><td class="rank">${i+1}</td><td>${escapeHTML(x.player)}</td><td>${personalities[x.type]?.emoji||""} ${personalities[x.type]?.name||x.type}</td><td>${Math.max(...Object.values(x.counts||{score:0}))}/10</td></tr>`).join("")}</tbody></table>`:
+"No players yet. Be the first to play! 💗";
+
+show("leaderboard");
+}
+
+function showHistory(){
+const list=getPlayers().slice().reverse();
+
+$("historyContent").innerHTML=list.length?
+`<table><thead><tr><th>Player</th><th>Personality</th><th>Date played</th></tr></thead><tbody>${list.map(x=>`<tr><td>${escapeHTML(x.player)}</td><td>${personalities[x.type]?.emoji||""} ${personalities[x.type]?.name||x.type}</td><td class="small">${escapeHTML(x.date||"")}</td></tr>`).join("")}</tbody></table>`:
+"No history yet. Play the quiz first!";
+
+show("history");
+}
+
+function escapeHTML(s){
+return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+function clearHistory(){
+if(confirm("Are you sure you want to clear all player history on this browser?")){
+localStorage.removeItem("funnyYouPlayers");
+showHistory();
+}
+}
+
+function shareResult(){
+if(!lastResult)return;
+const p=personalities[lastResult.type];
+const text=`😂 THE FUNNY YOU 💗\n${lastResult.player} is: ${p.emoji} ${p.name}\n${p.description}\nPlay the quiz and discover your personality!`;
+
+if(navigator.share){
+navigator.share({title:"THE FUNNY YOU",text}).catch(()=>{});
+}else if(navigator.clipboard?.writeText){
+navigator.clipboard.writeText(text)
+.then(()=>toast("Result copied! Paste it anywhere 💗"))
+.catch(()=>toast("Sharing isn't available in this browser."));
+}else{
+toast("Sharing isn't supported in this browser.");
+}
+}
+
+function toast(msg){
+const el=document.createElement("div");
+el.className="toast";
+el.textContent=msg;
+document.body.appendChild(el);
+setTimeout(()=>el.remove(),2500);
+}
+
+function restart(){
+$("playerName").value=player;
+startQuiz();
+}
+
+function goHome(){
+show("welcome");
+}
+
+</script>
+
 </body>
 </html>
